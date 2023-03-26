@@ -1,0 +1,22 @@
+-- Inf lockpick LOL
+-- Check if the lockpicking object is properly defined.
+local player = game:GetService("Players").LocalPlayer
+if not player then
+    warn("Code error: LocalPlayer not found. Code will not run.")
+    return
+end
+
+local lockpickingObject = player.Character and player.Character:FindFirstChild("Lockpick")
+if not lockpickingObject or typeof(lockpickingObject) ~= "Instance" then
+    warn("Code error: Lockpicking object not found or wrong data type. Code will not run.")
+    return
+end
+
+-- Destroy unnecessary properties of the lockpicking object.
+local properties = {"Remote", "StartUnlockEvent", "UnlockEvent"}
+for _, property in ipairs(properties) do
+    local propertyValue = lockpickingObject[property]
+    if propertyValue and propertyValue.Destroy then
+        propertyValue:Destroy()
+    end
+end NEED HOLD LOCKPICK
